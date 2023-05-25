@@ -1,6 +1,8 @@
 /*
  * File: builtin.c
  * Authors: Nourhan Hashem and Khalifa Elbad
+ *
+ *
  */
 #include "shell.h"
 int (*get_builtin(char *command))(char **args, char **front);
@@ -27,7 +29,7 @@ int (*get_builtin(char *command))(char **args, char **front)
 		{ "help", shellby_help },
 		{ NULL, NULL }
 	};
-	int i;
+	int m;
 
 	for (m = 0; funcs[m].name; i++)
 	{
@@ -61,7 +63,7 @@ int shellby_exit(char **args, char **front)
 			m = 1;
 			len_of_int++;
 		}
-		for (; args[0][m]; i++)
+		for (; args[0][i]; i++)
 		{
 			if (m <= len_of_int && args[0][m] >= '0' && args[0][m] <= '9')
 				num = (num * 10) + (args[0][m] - '0');
@@ -194,3 +196,16 @@ int shellby_help(char **args, char __attribute__((__unused__)) **front)
 
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
