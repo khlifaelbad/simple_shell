@@ -1,9 +1,3 @@
-/*
- * File: main.c
- *
- *
- */
-
 #include "shell.h"
 
 void sig_handler(int sig);
@@ -11,7 +5,7 @@ int execute(char **args, char **front);
 
 /**
  * sig_handler - Prints a new prompt upon a signal.
- * @sig: The signal.
+ * @sig:The signal.
  */
 void sig_handler(int sig)
 {
@@ -24,8 +18,8 @@ void sig_handler(int sig)
 
 /**
  * execute - Executes a command in a child process.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * @args:An array of arguments.
+ * @front:A double pointer to the beginning of args.
  *
  * Return: If an error occurs - a corresponding error code.
  *         O/w - The exit value of the last executed command.
@@ -85,7 +79,7 @@ int execute(char **args, char **front)
  * @argc: The number of arguments supplied to the program.
  * @argv: An array of pointers to the arguments.
  *
- * Return: The return value of the last executed command.
+ * Return:The return value of the last executed command.
  */
 int main(int argc, char *argv[])
 {
@@ -114,27 +108,26 @@ int main(int argc, char *argv[])
 	if (!isatty(STDIN_FILENO))
 	{
 		while (ret != END_OF_FILE && ret != EXIT)
-			ret = handle_args(exe_ret);
-		free_env();
-		free_alias_list(aliases);
-		return (*exe_ret);
-	}
+ret = handle_args(exe_ret);
+free_env();
+free_alias_list(aliases);
+return (*exe_ret);
+}
+while (1)
+{
+write(STDOUT_FILENO, prompt, 2);
+ret = handle_args(exe_ret);
+if (ret == END_OF_FILE || ret == EXIT)
+{
+if (ret == END_OF_FILE)
+write(STDOUT_FILENO, new_line, 1);
+free_env();
+free_alias_list(aliases);
+exit(*exe_ret);
+}
+}
 
-	while (1)
-	{
-		write(STDOUT_FILENO, prompt, 2);
-		ret = handle_args(exe_ret);
-		if (ret == END_OF_FILE || ret == EXIT)
-		{
-			if (ret == END_OF_FILE)
-				write(STDOUT_FILENO, new_line, 1);
-			free_env();
-			free_alias_list(aliases);
-			exit(*exe_ret);
-		}
-	}
-
-	free_env();
-	free_alias_list(aliases);
-	return (*exe_ret);
+free_env();
+free_alias_list(aliases);
+return (*exe_ret);
 }
