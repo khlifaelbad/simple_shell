@@ -1,16 +1,16 @@
 #include "shell.h"
 
-int num__len(int num);
+int num_len(int num);
 char *_itoa(int num);
-int create__error(char **args, int err);
+int create_error(char **args, int err);
 
 /**
- * num__len - Counts the digit length of a number.
+ * num_len - Counts the digit length of a number.
  * @num: The number to measure.
  *
  * Return: The digit length.
  */
-int num__len(int num)
+int num_len(int num)
 {
 	unsigned int num1;
 	int len = 1;
@@ -73,13 +73,13 @@ char *_itoa(int num)
 
 
 /**
- * create__error - Writes a custom error message to stderr.
+ * create_error - Writes a custom error message to stderr.
  * @args: An array of arguments.
  * @err: The error value.
  *
  * Return: The error value.
  */
-int create__error(char **args, int err)
+int create_error(char **args, int err)
 {
 	char *error;
 
