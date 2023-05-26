@@ -1,7 +1,6 @@
 /*
  * File: getline.c
- * Authors: sara
- *          Azza
+ *
  */
 
 #include "shell.h"
