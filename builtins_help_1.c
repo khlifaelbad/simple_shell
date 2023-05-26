@@ -6,7 +6,7 @@ void help_exit(void);
 void help_help(void);
 
 /**
-* help_all - Displays all possible builtin shellby commands.
+* help_all  displays all possible builtin shellby commands.
 */
 void help_all(void)
 {
@@ -47,7 +47,7 @@ msg = "is already an alias, replace its value with VALUE.\n";
 write(STDOUT_FILENO, msg, _strlen(msg));
 }
 /**
-* help_cd - Displays information on the shellby builtin command 'cd'.
+* help_cd displays information on the shellby builtin command 'cd'.
 */
 void help_cd(void)
 {
@@ -65,7 +65,7 @@ msg = "after a change of directory.\n";
 write(STDOUT_FILENO, msg, _strlen(msg));
 }
 /**
-* help_exit - Displays information on the shellby builtin command 'exit'.
+* help_exit displays information on the shellby builtin command 'exit'.
 */
 void help_exit(void)
 {
@@ -80,7 +80,7 @@ write(STDOUT_FILENO, msg, _strlen(msg));
 }
 
 /**
-* help_help - Displays information on the shellby builtin command 'help'.
+* help_help  displays information on the shellby builtin command 'help'.
 */
 void help_help(void)
 {
