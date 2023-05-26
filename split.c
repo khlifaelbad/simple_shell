@@ -1,9 +1,3 @@
-/*
- * File: split.c
- * 
- *          
- */
-
 #include "shell.h"
 
 int token_len(char *str, char *delim);
@@ -55,34 +49,32 @@ int count_tokens(char *str, char *delim)
 			index += token_len(str + index, delim);
 		}
 	}
-
-	return (tokens);
+return (tokens);
 }
 
 /**
- * _strtok - Tokenizes a string.
- * @line: The string.
- * @delim: The delimiter character to tokenize the string by.
- *
- * Return: A pointer to an array containing the tokenized words.
- */
+* _strtok - Tokenizes a string.
+* @line: The string.
+* @delim: The delimiter character to tokenize the string by.
+*
+* Return: A pointer to an array containing the tokenized words.
+*/
 char **_strtok(char *line, char *delim)
 {
-	char **ptr;
-	int index = 0, tokens, t, letters, l;
+char **ptr;
+int index = 0, tokens, t, letters, l;
+tokens = count_tokens(line, delim);
+if (tokens == 0)
+return (NULL);
 
-	tokens = count_tokens(line, delim);
-	if (tokens == 0)
-		return (NULL);
+ptr = malloc(sizeof(char *) * (tokens + 2));
+if (!ptr)
+return (NULL);
 
-	ptr = malloc(sizeof(char *) * (tokens + 2));
-	if (!ptr)
-		return (NULL);
-
-	for (t = 0; t < tokens; t++)
-	{
-		while (line[index] == *delim)
-			index++;
+for (t = 0; t < tokens; t++)
+{
+while (line[index] == *delim)
+	index++;
 
 		letters = token_len(line + index, delim);
 
