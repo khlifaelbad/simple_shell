@@ -3,8 +3,6 @@
 
 /*
  * File: shell.h
- * Authors: Azza sobhy
- *          Sara Mohamed
  */
 
 #include <fcntl.h>
