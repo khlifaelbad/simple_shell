@@ -16,7 +16,7 @@ void print_alias(alias_t *alias);
 int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 {
 	alias_t *temp = aliases;
-	int h, ret = 0;
+	int i, ret = 0;
 	char *value;
 
 	if (!args[0])
@@ -28,15 +28,15 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 		}
 		return (ret);
 	}
-	for (h = 0; args[h]; h++)
+	for (i= 0; args[i]; i++)
 	{
 		temp = aliases;
-		value = _strchr(args[h], '=');
+		value = _strchr(args[i], '=');
 		if (!value)
 		{
 			while (temp)
 			{
-				if (_strcmp(args[h], temp->name) == 0)
+				if (_strcmp(args[i], temp->name) == 0)
 				{
 					print_alias(temp);
 					break;
@@ -44,10 +44,10 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 				temp = temp->next;
 			}
 			if (!temp)
-				ret = create_error(args + h, 1);
+				ret = create_error(args + i, 1);
 		}
 		else
-			set_alias(args[h], value);
+			set_alias(args[i], value);
 	}
 	return (ret);
 }
@@ -120,17 +120,17 @@ void print_alias(alias_t *alias)
 char **replace_aliases(char **args)
 {
 	alias_t *temp;
-	int h;
+	int i;
 	char *new_value;
 
 	if (_strcmp(args[0], "alias") == 0)
 		return (args);
-	for (h = 0; args[h]; h++)
+	for (i= 0; args[i]; i++)
 	{
 		temp = aliases;
 		while (temp)
 		{
-			if (_strcmp(args[h], temp->name) == 0)
+			if (_strcmp(args[i], temp->name) == 0)
 			{
 				new_value = malloc(sizeof(char) * (_strlen(temp->value) + 1));
 				if (!new_value)
@@ -140,8 +140,8 @@ char **replace_aliases(char **args)
 				}
 				_strcpy(new_value, temp->value);
 				free(args[i]);
-				args[h] = new_value;
-				h--;
+				args[i] = new_value;
+				i--;
 				break;
 			}
 			temp = temp->next;
@@ -150,3 +150,7 @@ char **replace_aliases(char **args)
 
 	return (args);
 }
+/*Authors
+Nourhan Hashem
+Khalifa Elbad
+*/
