@@ -1,9 +1,3 @@
-/*
- * File: builtin.c
- * Authors: Nourhan Hashem and Khalifa Elbad
- *
- *
- */
 #include "shell.h"
 int (*get_builtin(char *command))(char **args, char **front);
 int shellby_exit(char **args, char **front);
@@ -29,14 +23,14 @@ int (*get_builtin(char *command))(char **args, char **front)
 		{ "help", shellby_help },
 		{ NULL, NULL }
 	};
-	int m;
+	int i;
 
-	for (m = 0; funcs[m].name; i++)
+	for (i = 0; funcs[i].name; i++)
 	{
-		if (_strcmp(funcs[m].name, command) == 0)
+		if (_strcmp(funcs[i].name, command) == 0)
 			break;
 	}
-	return (funcs[m].f);
+	return (funcs[i].f);
 }
 
 /**
@@ -53,20 +47,20 @@ int (*get_builtin(char *command))(char **args, char **front)
  */
 int shellby_exit(char **args, char **front)
 {
-	int m, len_of_int = 10;
+	int i, len_of_int = 10;
 	unsigned int num = 0, max = 1 << (sizeof(int) * 8 - 1);
 
 	if (args[0])
 	{
 		if (args[0][0] == '+')
 		{
-			m = 1;
+			i = 1;
 			len_of_int++;
 		}
 		for (; args[0][i]; i++)
 		{
-			if (m <= len_of_int && args[0][m] >= '0' && args[0][m] <= '9')
-				num = (num * 10) + (args[0][m] - '0');
+			if (i <= len_of_int && args[0][i] >= '0' && args[0][i] <= '9')
+				num = (num * 10) + (args[0][i] - '0');
 			else
 				return (create_error(--args, 2));
 		}
@@ -196,16 +190,3 @@ int shellby_help(char **args, char __attribute__((__unused__)) **front)
 
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
