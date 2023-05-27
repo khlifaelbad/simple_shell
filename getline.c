@@ -1,7 +1,7 @@
 #include "shell.h"
-void *_realloc(void *pointr, unsigned int old_size, unsigned int new_size);
-void assign_lineptr(char **linepointr, size_t *n, char *buffer, size_t b);
-ssize_t _getline(char **linepointr, size_t *n, FILE *stream);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 /**
 * _realloc - Reallocates a memory block using malloc and free.
@@ -16,33 +16,33 @@ ssize_t _getline(char **linepointr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 void *mem;
-char *pointr_copy, *filler;
+char *ptr_copy, *filler;
 unsigned int indexx;
 if (new_size == old_size)
-return (pointr);
-if (pointr == NULL)
+return (ptr);
+if (ptr == NULL)
 {
 mem = malloc(new_size);
 if (mem == NULL)
 return (NULL);
 return (mem);
 }
-if (new_size == 0 && pointr != NULL)
+if (new_size == 0 && ptr != NULL)
 {
-free(pointr);
+free(ptr);
 return (NULL);
 }
-pointr_copy = pointr;
-mem = malloc(sizeof(*pointr_copy) * new_size);
+ptr_copy = ptr;
+mem = malloc(sizeof(*ptr_copy) * new_size);
 if (mem == NULL)
 {
-free(pointr);
+free(ptr);
 return (NULL);
 }
 filler = mem;
 for (indexx = 0; indexx < old_size && indexx < new_size; indexx++)
-filler[indexx] = *pointr_copy++;
-free(pointr);
+filler[indexx] = *ptr_copy++;
+free(ptr);
 return (mem);
 }
 /**
@@ -52,15 +52,15 @@ return (mem);
 * @buffer: The string to assign to lineptr.
 * @b: The size of buffer.
 */
-void assign_linepointr(char **linepointr, size_t *n, char *buffer, size_t b)
+void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
 {
-if (*linepointr == NULL)
+if (*lineptr == NULL)
 {
 if (b > 120)
 *n = b;
 else
 *n = 120;
-*linepointr  = buffer;
+*lineptr  = buffer;
 }
 else if (*n < b)
 {
@@ -68,11 +68,11 @@ if (b > 120)
 *n = b;
 else
 *n = 120;
-*linepointr = buffer;
+*lineptr = buffer;
 }
 else
 {
-_strcpy(*linepointr, buffer);
+_strcpy(*lineptr, buffer);
 free(buffer);
 }
 }
@@ -84,7 +84,7 @@ free(buffer);
 *
 * Return: The number of bytes read.
 */
-ssize_t _getline(char **linepointr, size_t *n, FILE *stream)
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
 static ssize_t input;
 ssize_t ret;
@@ -117,7 +117,7 @@ buffer[input] = c;
 input++;
 }
 buffer[input] = '\0';
-assign_linepointr(linepointr, n, buffer, input);
+assign_lineptr(lineptr, n, buffer, input);
 ret = input;
 if (r != 0)
 input = 0;
