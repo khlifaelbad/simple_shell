@@ -52,13 +52,13 @@ void handle_builtins(char **av, int ac, char **cmd, int *index, int *status)
 		_print_env(cmd, status);
 }
 /**
- * _print_envir - print env content
+ * _print_env - print env content
  * @status: status
  * @command: command array
  *
  * Return: nothing
 */
-void _print_envir(char **command, int *status)
+void _print_env(char **command, int *status)
 {
 	int i;
 
@@ -72,7 +72,7 @@ void _print_envir(char **command, int *status)
 }
 
 /**
- * ex_builtin - exit builtin function
+ * exit_builtin - exit builtin function
  * @av: argument array
  * @ac: argument count
  * @command: command array
@@ -81,7 +81,7 @@ void _print_envir(char **command, int *status)
  *
  * Return: nothing
 */
-void ex_builtin(char **av, int ac, char **command, int *status, int *index)
+void exit_builtin(char **av, int ac, char **command, int *status, int *index)
 {
 	int length = 0, n;
 	(void)ac;
@@ -126,7 +126,7 @@ void print_exit_error(char **av, int *index, char **command)
 
 	str_index =  _itoa(*index);
 	write(STDERR_FILENO, av[0], _strlen(av[0]));
-OAOA	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, str_index, _strlen(str_index));
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, command[0], _strlen(command[0]));
