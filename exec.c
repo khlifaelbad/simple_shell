@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * start_process - start a process
+ * start_process - start new process
  * @d: data struct input
  * Return: void
  */
