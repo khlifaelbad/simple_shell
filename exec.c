@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * start_process - start new process
+ * start_process - start a new process
  * @d: data struct input
  * Return: void
  */
@@ -79,5 +79,4 @@ void _exec(data *d)
 		free(d->cmd);
 	}
 }
-
 
