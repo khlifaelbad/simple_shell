@@ -1,19 +1,37 @@
 #include "main.h"
 
 /**
- * main - init data
- * @argc: input size of @argv
- * @argv: input array of command line arguments
- * Return: Always 0.
- */
-int main(int argc, char **argv)
+ * main - main function
+ * @ac: argument count
+ * @av: argument table
+ *
+ * Return: nothing
+*/
+int main(int ac, char **av)
 {
-	data d;
-	(void)argc;
-	init_data(&d, argv[0]);
-	_exec(&d);
+	char *line = NULL, **command = NULL;
+	int status = 0, index = 0;
+	(void) ac;
 
-	return (0);
+	while (1)
+	{
+		line = _getline();
+		if (line == NULL)
+		{
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
+			return (status);
+		}
+		index++;
+		command = _tokenizer(line);
+		if (command == NULL)
+			continue;
+		if (is_builtins(av, ac, command, &index, &status) == 1)
+		{
+			handle_builtins(av, ac, command, &index, &status);
+		}
+		else
+			status = execute(command, av, index);
+	}
 }
-
 
